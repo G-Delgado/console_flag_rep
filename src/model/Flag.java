@@ -2,11 +2,25 @@ package model;
 
 public class Flag {
     private int width;
+    private int height;
     private double speed;
 
-    public Flag(int w, double s) {
+    public Flag(int w, int h, double s) {
         width = w;
+        height = h;
         speed = s;
+    }
+
+    public void draw() {
+
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int h) {
+        height = h;
     }
 
     public int getWidth() {
