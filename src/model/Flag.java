@@ -10,7 +10,6 @@ public class Flag {
     private long speed;
     private int color;
     private int start;
-    private int end;
 
 
     public final static String ESC   = "\u001b[";
@@ -47,9 +46,6 @@ public class Flag {
                 // This command assings the cursor in the (y,x) position.
                 bw.write(ESC + y + ";" + w + "f");
             }
-            /*bw.write(ESC + color + "m" + ' ');
-            bw.flush();
-            Thread.sleep(speed);*/
             // The drawing width increases
             w++;
             bw.write(ESC + start + ";" + w + "f");

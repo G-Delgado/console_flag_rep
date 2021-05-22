@@ -12,14 +12,11 @@ public class FlagThread extends Thread {
 	}
 
 	public void run() {
-			try {
-				colorFlag.draw();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				try {
+					colorFlag.draw();
+				} catch (InterruptedException | IOException e) {
+					e.printStackTrace();
+				}
 	
 	}
 }
