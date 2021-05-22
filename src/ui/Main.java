@@ -1,5 +1,7 @@
 package ui;
 
+import thread.FlagThread;
+
 public class Main {
 	
 	public final static String ESC   = "\u001b[";
@@ -9,9 +11,9 @@ public class Main {
 	public final static String LEFT  = ESC+"D";
 	public final static String NXLN  = ESC+"1E";
 
-	public final static int YELLOW = 31;
-	public final static int BLUE = 91;
-	public final static int RED = 104;
+	public final static int YELLOW = 43;
+	public final static int BLUE = 44;
+	public final static int RED = 41;
 	
 	public final static int[] TEXT_FORMAT = new int[] 
 			{0,1,22,4,24,27,31,32,33,34,35,36,37,
@@ -19,54 +21,27 @@ public class Main {
 			 95,96,97,100,101,102,103,104,105,106,107};
 
 	public static void main(String[] args) throws InterruptedException {
-		//char ch = '*';
-		//int sleep = 50;
-		//int width = 1;
-		//int max = 30;
-		//int color = 0;
+		int width = 60;
 
+		// The second and fifth parameters are really important. As well as the width.
+		// The "height" allows to manipulate the size of the flag in the y-axis. The yellow one HAS to be half of the flag.
+		// The "start" tells us at which position does an specific color begins. Therefore we need to make the counts with the height
+		// However, this could be automated.
+		FlagThread fgOne = new FlagThread(width, 8, 5, YELLOW, 1);
+		FlagThread fgTwo = new FlagThread(width, 4, 30, BLUE, 9);
+		FlagThread fgThree = new FlagThread(width, 4, 40, RED, 13);
 		
-		System.out.print(ESC+"2J");//Clear screen
-		System.out.print(ESC+"0G"+ESC+"0d");//Cursor in 0,0
 		
-		//System.out.print(ESC+TEXT_FORMAT[color]+"m"+ch);
-		//Thread.sleep(sleep);
-		//color = 34;
-		//System.out.print(ESC+TEXT_FORMAT[color]+"m"+ch);
+		fgOne.start();
+		fgTwo.start();
+		fgThree.start();
 
-		// TEXT_FORMAT[16] = YELLOW
-		// TEXT_FORMAT[17] = BLUE
-		// TEXt_FORMAT[14] = RED
-		int height = 4;
-		for (int j = 1; j <= height; j++) {
-			int i = 0;
-			while (i < 80) {
-				System.out.print(ESC+TEXT_FORMAT[16]+"m" + " ");
-				i++;
-			}
-			System.out.print(NXLN);
-		}
-
-		height = 2;
-		for (int j = 1; j <= height; j++) {
-			int i = 0;
-			while (i < 80) {
-				System.out.print(ESC+TEXT_FORMAT[17]+"m" + " ");
-				i++;
-			}
-			System.out.print(NXLN);
-		}
-
-		for (int j = 1; j <=height; j++) {
-			int i = 0;
-			while (i < 80) {
-				System.out.print(ESC+TEXT_FORMAT[14]+"m" + " ");
-				i++;
-			}
-			System.out.print(NXLN);
-		}
-
-		System.out.print(ESC + "m");
+		fgOne.join();
+		fgTwo.join();
+		fgThree.join();
+		
+		System.out.println(ESC + 0 + "m");
+		
 	}
 
 }
